@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
   data: () => ({
     headers: [
@@ -142,6 +143,9 @@ export default {
         salary: '$78,615'
       }
     ]
-  })
+  }),
+  methods: {
+   
+  }
 }
 </script>
