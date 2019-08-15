@@ -31,7 +31,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'hash',
   routes: paths.map(path => route(path.path, path.view, path.name)).concat([
-    { path: '*', redirect: '/dashboard' }
+    { path: '*', redirect: '/face-recognize' }
   ]),
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

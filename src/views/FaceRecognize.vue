@@ -1,5 +1,12 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
+    <v-snackbar :color="color" :top="top" v-model="snackbar" dark>
+      <v-icon color="white" class="mr-3">mdi-bell-plus</v-icon>
+      <div>
+        <b>{{message}}</b>
+      </div>
+      <v-icon size="16" @click="snackbar = false">mdi-close-circle</v-icon>
+    </v-snackbar>
     <v-layout justify-space-around>
       <video ref="video" id="video" hidden width="500" height="380" autoplay></video>
       <canvas ref="vdo" width="500" height="380"></canvas>
@@ -46,11 +53,14 @@ export default {
       image: "",
       name: "",
       similarity: "",
-      present: ""
+      present: "",
+      snackbar: false,
+      top: true
     };
   },
 
   mounted() {
+    window.date = "Date";
     this.video = this.$refs.video;
     this.canvas = this.$refs.vdo.getContext("2d");
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -146,9 +156,10 @@ export default {
       }
     },
     req() {
-    let today = new Date()
-    let date = today.getFullYear()+today.getMonth().toString()+today.getDay()
-    
+      let today = new Date();
+      let month = today.getMonth() + "-" + today.getFullYear();
+      let day = today.getDay() + "-" + month;
+
       request(
         {
           method: "POST",
@@ -180,15 +191,29 @@ export default {
                 if (obj[i].similarity > 0.9) {
                   result = obj[i];
                   let present = firebase.database().ref("Present");
-                  present.child(date).orderByChild('id').equalTo(result.external_image_id).once("value", snap=>{
-                    if(snap.exists()){
-                        alert("Already Presented")
-                    }else{
-                        present.child(date).push({id: result.external_image_id}).then(res=>{
-                            alert("Present")
-                        })
-                    }
-                  })
+                  present
+                    .child(month)
+                    .orderByChild("id")
+                    .equalTo(result.external_fields.id)
+                    .once("value", snap => {
+                      if (snap.exists()) {
+                        this.snack(
+                          result.external_image_id +
+                            " has already been presented!",
+                          "warning"
+                        );
+                      } else {
+                        present
+                          .child(month)
+                          .push({ id: result.external_fields.id, date: day })
+                          .then(res => {
+                            this.snack(
+                              result.external_image_id + " has been presented!",
+                              "success"
+                            );
+                          });
+                      }
+                    });
                   break;
                 }
               }
@@ -215,6 +240,11 @@ export default {
       //       console.log(body);
       //     }
       //   );
+    },
+    snack(message, color) {
+      this.color = color;
+      this.message = message;
+      this.snackbar = true;
     }
   }
 };

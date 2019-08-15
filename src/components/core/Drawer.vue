@@ -88,19 +88,19 @@ export default {
     logo: './img/vuetifylogo.png',
     links: [
       {
-        to: '/dashboard',
-        icon: 'mdi-view-dashboard',
-        text: 'Dashboard'
+        to: '/face-recognize',
+        icon: 'mdi-account-search',
+        text: 'Face Recognize'
       },
       {
-        to: '/user-profile',
+        to: '/add-employee',
         icon: 'mdi-account',
         text: 'Add Employee'
       },
       {
-        to: '/table-list',
-        icon: 'mdi-clipboard-outline',
-        text: 'Table List'
+        to: '/attend',
+        icon: 'mdi-account-check',
+        text: 'Attended'
       },
       {
         to: '/typography',

@@ -126,7 +126,7 @@ export default {
     };
   },
   mounted() {
-    
+    console.log(window.date)
   },
   methods: {
     req() {
@@ -223,7 +223,8 @@ export default {
                 salary: this.salary,
                 position: this.position,
                 ph: this.ph,
-                id: uuid
+                id: uuid,
+                email: this.email
               })
               .then(res => {
                 this.snack("Added Employee", "success");

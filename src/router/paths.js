@@ -5,19 +5,19 @@
  */
 export default [
   {
-    path: '/dashboard',
+    path: '/face-recognize',
     // Relative to /src/views
-    view: 'Dashboard'
+    view: 'FaceRecognize'
   },
   {
-    path: '/user-profile',
-    name: 'User Profile',
-    view: 'UserProfile'
+    path: '/add-employee',
+    name: 'Add Employee',
+    view: 'AddEmployee'
   },
   {
-    path: '/table-list',
-    name: 'Table List',
-    view: 'TableList'
+    path: '/attend',
+    name: 'Attended List',
+    view: 'Attended'
   },
   {
     path: '/typography',
