@@ -108,16 +108,16 @@ export default {
     mitems: []
   }),
   mounted() {
+    let today = new Date();
+    let month = today.getMonth() + "-" + today.getFullYear();
+    let date = today.getDay() + "-" + month;
     // this.getTodayAttend();
-    this.thisMonth();
-    this.getTodayAttend();
+    this.thisMonth(month);
+    this.getTodayAttend(date, month);
   },
   methods: {
-    getTodayAttend() {
-      let today = new Date();
-      let month = today.getMonth() + "-" + today.getFullYear();
-      let date = today.getDay() + "-" + month;
-      let present = firebase.database().ref("Employee");
+    getTodayAttend(date, month) {
+      let employee = firebase.database().ref("Employee");
       firebase
         .database()
         .ref("Present")
@@ -127,7 +127,7 @@ export default {
         .once("value", snap => {
           snap.forEach(value => {
             //this.id.push(value.val().id);
-            present
+            employee
               .orderByChild("id")
               .equalTo(value.val().id)
               .limitToFirst(1)
@@ -145,7 +145,7 @@ export default {
           });
         });
     },
-    thisMonth() {
+    thisMonth(month) {
       let present = firebase.database().ref("Present");
       firebase
         .database()
@@ -153,7 +153,7 @@ export default {
         .once("value", snap => {
           snap.forEach(value => {
             present
-              .child("7-2019")
+              .child(month)
               .orderByChild("id")
               .equalTo(value.val().id)
               .once("value", data => {
@@ -162,7 +162,7 @@ export default {
                 this.mitems.push({
                   name: value.val().name,
                   email: value.val().email,
-                  salary: salary * data.numChildren(),
+                  salary: (salary * data.numChildren()).toFixed(2),
                   date: "Auguest, 2019",
                   days: data.numChildren()
                 });
