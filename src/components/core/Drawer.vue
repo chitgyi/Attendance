@@ -94,18 +94,18 @@ export default {
       },
       {
         to: '/add-employee',
-        icon: 'mdi-account',
+        icon: 'mdi-account-plus',
         text: 'Add Employee'
       },
       {
         to: '/attend',
-        icon: 'mdi-account-check',
+        icon: 'mdi-account-multiple-check',
         text: 'Attended'
       },
       {
-        to: '/typography',
-        icon: 'mdi-format-font',
-        text: 'Typography'
+        to: '/employee-list',
+        icon: 'mdi-account-multiple',
+        text: 'Employee List'
       },
       {
         to: '/icons',

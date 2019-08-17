@@ -20,8 +20,9 @@ export default [
     view: 'Attended'
   },
   {
-    path: '/typography',
-    view: 'Typography'
+    path: '/employee-list',
+    name: 'Employee List',
+    view: 'EmployeeList'
   },
   {
     path: '/icons',

@@ -176,7 +176,7 @@ export default {
           method: "DELETE",
           timeout: 3500,
           url:
-            "https://face.ap-southeast-1.myhuaweicloud.com/v2/05c036d45c0026ed2fd9c00b30629671/face-sets/test/faces",
+            "https://face.ap-southeast-1.myhuaweicloud.com/v2/05c036d45c0026ed2fd9c00b30629671/face-sets/test/faces/batch",
           headers: {
             "Content-Type": "application/json",
             "X-Auth-Token":
@@ -184,10 +184,11 @@ export default {
           },
           json: true,
           body: {
-            filter: "id:" + uid
+            filter: "id: " + uid
           }
         },
         (err, res, body) => {
+          console.log(body);
           if (res && res.statusCode == 200) {
             let year = new Date().getFullYear();
             firebase
@@ -211,7 +212,8 @@ export default {
                   });
                 });
             }
-            console.log("Deleted!")
+            this.getEmployee()
+            this.snack("Deleted!", "success");
           } else {
             this.snack("Unable to Delete!", "error");
           }
@@ -229,6 +231,7 @@ export default {
         .push({ id: id, date: date });
     },
     getEmployee() {
+    this.items = []
       firebase
         .database()
         .ref("Employee")

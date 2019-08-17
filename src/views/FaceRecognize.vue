@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
-    <v-snackbar :timeout="timeout" :color="color" :top="top" v-model="snackbar" dark>
+    <v-snackbar :color="color" :top="top" v-model="snackbar" dark>
       <v-icon color="white" class="mr-3">mdi-bell-plus</v-icon>
       <div>
         <b>{{message}}</b>
@@ -11,8 +11,8 @@
       <video ref="video" id="video" hidden width="500" height="380" autoplay></video>
       <canvas ref="vdo" width="500" height="380"></canvas>
       <div>
-        <canvas ref="result" hidden></canvas>
-        <img v-bind:src="image" />
+        <canvas ref="result" hidden />
+        <img width="200px" v-bind:src="image" />
         <h5>Name : {{name}}</h5>
         <h5>Similarity : {{similarity}}%</h5>
         <h5>Attended : Present</h5>
@@ -55,8 +55,7 @@ export default {
       similarity: "",
       present: "",
       snackbar: false,
-      top: true,
-      timestamp: 1500
+      top: true
     };
   },
 
@@ -79,13 +78,6 @@ export default {
     setInterval(() => this.result(), 5000);
   },
   methods: {
-    // capture() {
-    //   this.canvas = this.$refs.canvas;
-    //   var context = this.canvas
-    //     .getContext("2d")
-    //     .drawImage(this.video, 0, 0, 400, 300);
-    //   this.captures.push(canvas.toDataURL("image/png"));
-    // },
     result() {
       let img = this.canvas.getImageData(
         this.resized.x,
@@ -142,13 +134,13 @@ export default {
             500 - dets[i][1] - dets[i][2] / 2,
             dets[i][0] - dets[i][2] / 2,
             dets[i][2],
-            dets[i][2] + 10
+            dets[i][2]
           );
           this.resized = {
             x: dets[i][1] - dets[i][2] / 2,
             y: dets[i][0] - dets[i][2] / 2,
             w: dets[i][2],
-            h: dets[i][2] + 10
+            h: dets[i][2]
           };
           ctx.lineWidth = 3;
           ctx.strokeStyle = "blue";
@@ -160,6 +152,10 @@ export default {
       }
     },
     req() {
+      let today = new Date();
+      let month = today.getMonth() + "-" + today.getFullYear();
+      let day = today.getDay() + "-" + month;
+
       request(
         {
           method: "POST",
@@ -183,9 +179,6 @@ export default {
           }
         },
         (err, res, body) => {
-          let today = new Date();
-          let month = today.getMonth() + "-" + today.getFullYear();
-          let day = today.getDay() + "-" + month;
           let result = { similarity: 0, external_image_id: "unknown" };
           if (!err && res.statusCode == 200) {
             let obj = body.faces;
@@ -193,36 +186,29 @@ export default {
               for (var i = 0; i < obj.length; i++) {
                 if (obj[i].similarity > 0.9) {
                   result = obj[i];
-                  firebase
-                    .database()
-                    .ref("Present")
+                  let present = firebase.database().ref("Present");
+                  present
                     .child(month)
-                    .orderByChild("date")
-                    .equalTo(day)
-                    .once("value", snaps => {
-                      snaps.forEach(snap => {
-                        if (snap.val().id === result.external_fields.id) {
-                          this.snack(
-                            result.external_image_id +
-                              " has already been presented!",
-                            "warning"
-                          );
-                        } else {
-                          present
-                            .child(month)
-                            .push({
-                              id: result.external_fields.id,
-                              date: day
-                            })
-                            .then(res => {
-                              this.snack(
-                                result.external_image_id +
-                                  " has been presented!",
-                                "success"
-                              );
-                            });
-                        }
-                      });
+                    .orderByChild("id")
+                    .equalTo(result.external_fields.id)
+                    .once("value", snap => {
+                      if (snap.exists()) {
+                        this.snack(
+                          result.external_image_id +
+                            " has already been presented!",
+                          "warning"
+                        );
+                      } else {
+                        present
+                          .child(month)
+                          .push({ id: result.external_fields.id, date: day })
+                          .then(res => {
+                            this.snack(
+                              result.external_image_id + " has been presented!",
+                              "success"
+                            );
+                          });
+                      }
                     });
                   break;
                 }
@@ -233,23 +219,6 @@ export default {
           this.similarity = result.similarity.toFixed(2) * 100;
         }
       );
-      //   request(
-      //     {
-      //       method: "POST",
-      //       timeout: 3500,
-      //       url: "http://localhost:9022/db/api",
-      //       headers: {
-      //         "Content-Type": "application/json"
-      //       },
-      //       json: true,
-      //       body: {
-      //         image: this.image.substring(22)
-      //       }
-      //     },
-      //     (err, res, body) => {
-      //       console.log(body);
-      //     }
-      //   );
     },
     snack(message, color) {
       this.color = color;

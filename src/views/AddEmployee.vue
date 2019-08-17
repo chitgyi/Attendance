@@ -228,6 +228,13 @@ export default {
                 email: this.email
               })
               .then(res => {
+                this.name = "";
+                this.email = "";
+                this.position = "";
+                this.file = "";
+                this.address = "";
+                this.salary = "";
+                this.ph = "";
                 this.snack("Added Employee", "success");
               })
               .catch(err => {
