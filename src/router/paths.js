@@ -21,24 +21,11 @@ export default [
   },
   {
     path: '/employee-list',
-    name: 'Employee List',
+    name: 'Employee Management',
     view: 'EmployeeList'
   },
   {
     path: '/icons',
     view: 'Icons'
   },
-  {
-    path: '/maps',
-    view: 'Maps'
-  },
-  {
-    path: '/notifications',
-    view: 'Notifications'
-  },
-  {
-    path: '/upgrade',
-    name: 'Upgrade to PRO',
-    view: 'Upgrade'
-  }
 ]

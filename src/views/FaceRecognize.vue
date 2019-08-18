@@ -12,10 +12,9 @@
       <canvas ref="vdo" width="500" height="380"></canvas>
       <div>
         <canvas ref="result" hidden />
-        <img width="200px" v-bind:src="image" />
+        <v-img width="200" v-bind:src="image"></v-img>
         <h5>Name : {{name}}</h5>
         <h5>Similarity : {{similarity}}%</h5>
-        <h5>Attended : Present</h5>
       </div>
     </v-layout>
   </v-container>
@@ -66,7 +65,10 @@ export default {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
         this.video.srcObject = stream;
+        window.stream = stream
       });
+    }else{
+        this.snack("Please update your webcam!", "error")
     }
     this.canvas.scale(-1, 1);
     this.canvas.translate(-500, 0);

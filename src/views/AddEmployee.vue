@@ -8,7 +8,15 @@
       <v-icon size="16" @click="snackbar = false">mdi-close-circle</v-icon>
     </v-snackbar>
     <v-layout justify-center wrap>
-      <v-progress-linear :indeterminate="true" :active="show"></v-progress-linear>
+      <v-dialog v-model="show" hide-overlay persistent width="300">
+        <v-card color="info" dark>
+          <v-card-text>
+            Adding Employee
+            <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+      <!-- <v-progress-linear :indeterminate="true" :active="show"></v-progress-linear> -->
       <v-flex xs12 md8>
         <material-card color="blue" title="Add Employee" text="Complete your profile">
           <v-form>

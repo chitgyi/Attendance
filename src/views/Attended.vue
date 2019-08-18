@@ -146,6 +146,10 @@ export default {
         });
     },
     thisMonth(month) {
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let date = new Date()
+    let mon = date.getMonth()
+    let year = date.getFullYear()
       let present = firebase.database().ref("Present");
       firebase
         .database()
@@ -163,7 +167,7 @@ export default {
                   name: value.val().name,
                   email: value.val().email,
                   salary: (salary * data.numChildren()).toFixed(2),
-                  date: "Auguest, 2019",
+                  date: months[mon-1]+", "+year,
                   days: data.numChildren()
                 });
               });

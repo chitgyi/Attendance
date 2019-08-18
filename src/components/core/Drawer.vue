@@ -30,19 +30,11 @@
             />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Vuetify MD
+            Attended System
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
-        <v-list-tile
-          v-if="responsive"
-        >
-          <v-text-field
-            class="purple-input search-input"
-            label="Search..."
-            color="purple"
-          />
-        </v-list-tile>
+        
         <v-list-tile
           v-for="(link, i) in links"
           :key="i"
@@ -57,19 +49,6 @@
           <v-list-tile-title
             v-text="link.text"
           />
-        </v-list-tile>
-        <v-list-tile
-          disabled
-          active-class="primary"
-          class="v-list-item v-list__tile--buy"
-          to="/upgrade"
-        >
-          <v-list-tile-action>
-            <v-icon>mdi-package-up</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="font-weight-light">
-            Upgrade To PRO
-          </v-list-tile-title>
         </v-list-tile>
       </v-layout>
     </v-img>
@@ -104,7 +83,7 @@ export default {
       },
       {
         to: '/employee-list',
-        icon: 'mdi-account-multiple',
+        icon: 'mdi-account-group',
         text: 'Employee List'
       },
       {
@@ -112,16 +91,6 @@ export default {
         icon: 'mdi-chart-bubble',
         text: 'Icons'
       },
-      {
-        to: '/maps',
-        icon: 'mdi-map-marker',
-        text: 'Maps'
-      },
-      {
-        to: '/notifications',
-        icon: 'mdi-bell',
-        text: 'Notifications'
-      }
     ],
     responsive: false
   }),
