@@ -1,12 +1,25 @@
 .DS_Store
 node_modules
 /dist
+/release/release-builds
+/release/node_modules
+/release/img
+/release/css
+/release/js
+/release/assets
+/release/fonts
+/release/*.png
+/release/*.ico
+/release/*.html
 package-lock.json
 /docs/.vuepress/dist
 # local env files
 .env.local
 .env.*.local
 
+.exe
+.deb
+.app
 # Log files
 npm-debug.log*
 yarn-debug.log*

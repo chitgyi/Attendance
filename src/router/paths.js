@@ -27,5 +27,5 @@ export default [
   {
     path: '/icons',
     view: 'Icons'
-  },
+  }
 ]

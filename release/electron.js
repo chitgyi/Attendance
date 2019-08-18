@@ -4,16 +4,17 @@ let win
 
 function createWindow () {
   win = new BrowserWindow({
-    width: 1200,
+    width: 1000,
     height: 700,
+    resizable: false,
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
-      devTools: true
+      devTools: false
     }
   })
 
-  win.loadFile('dist/index.html')
+  win.loadFile('index.html')
 
   win.webContents.openDevTools()
 

@@ -1,5 +1,7 @@
 {
-  "name": "vuetify-material-dashboard",
+  "name": "attended-system",
+  "author": "ALERT",
+  "description": "Face Recognition",
   "version": "1.0.0",
   "private": true,
   "main": "electron.js",
@@ -30,6 +32,7 @@
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-standard": "^3.0.1",
     "axios": "^0.19.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "electron": "^6.0.1",
     "material-design-icons-iconfont": "^3.0.3",
     "stylus": "^0.54.5",

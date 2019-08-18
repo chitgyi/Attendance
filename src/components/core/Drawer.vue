@@ -34,7 +34,7 @@
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
-        
+
         <v-list-tile
           v-for="(link, i) in links"
           :key="i"
@@ -90,7 +90,7 @@ export default {
         to: '/icons',
         icon: 'mdi-chart-bubble',
         text: 'Icons'
-      },
+      }
     ],
     responsive: false
   }),

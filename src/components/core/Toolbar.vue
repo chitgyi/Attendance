@@ -1,8 +1,17 @@
 <template>
-  <v-toolbar id="core-toolbar" flat prominent style="background: #eee;">
+  <v-toolbar
+    id="core-toolbar"
+    flat
+    prominent
+    style="background: #eee;">
     <div class="v-toolbar-title">
       <v-toolbar-title class="tertiary--text font-weight-light">
-        <v-btn v-if="responsive" class="default v-btn--simple" dark icon @click.stop="onClickBtn">
+        <v-btn
+          v-if="responsive"
+          class="default v-btn--simple"
+          dark
+          icon
+          @click.stop="onClickBtn">
           <v-icon>mdi-view-list</v-icon>
         </v-btn>
         {{ title }}
@@ -11,17 +20,32 @@
 
     <v-spacer />
     <v-toolbar-items>
-      <v-flex align-center layout py-2>
-        <router-link v-ripple class="toolbar-items" to="/">
+      <v-flex
+        align-center
+        layout
+        py-2>
+        <router-link
+          v-ripple
+          class="toolbar-items"
+          to="/">
           <v-icon color="blue">mdi-account-search</v-icon>
         </router-link>
-        <router-link v-ripple class="toolbar-items" to="/add-employee">
+        <router-link
+          v-ripple
+          class="toolbar-items"
+          to="/add-employee">
           <v-icon color="blue">mdi-account-plus</v-icon>
         </router-link>
-        <router-link v-ripple class="toolbar-items" to="/attend">
+        <router-link
+          v-ripple
+          class="toolbar-items"
+          to="/attend">
           <v-icon color="blue">mdi-account-multiple-check</v-icon>
         </router-link>
-        <router-link v-ripple class="toolbar-items" to="/employee-list">
+        <router-link
+          v-ripple
+          class="toolbar-items"
+          to="/employee-list">
           <v-icon color="blue">mdi-account-group</v-icon>
         </router-link>
       </v-flex>
@@ -30,16 +54,16 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations } from 'vuex'
 
 export default {
   data: () => ({
     notifications: [
-      "Mike, John responded to your email",
-      "You have 5 new tasks",
+      'Mike, John responded to your email',
+      'You have 5 new tasks',
       "You're now a friend with Andrew",
-      "Another Notification",
-      "Another One"
+      'Another Notification',
+      'Another One'
     ],
     title: null,
     responsive: false,
@@ -47,38 +71,38 @@ export default {
   }),
 
   watch: {
-    $route(val) {
-      this.title = val.name;
+    $route (val) {
+      this.title = val.name
     }
   },
 
-  mounted() {
-    this.onResponsiveInverted();
-    window.addEventListener("resize", this.onResponsiveInverted);
+  mounted () {
+    this.onResponsiveInverted()
+    window.addEventListener('resize', this.onResponsiveInverted)
   },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResponsiveInverted);
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResponsiveInverted)
   },
 
   methods: {
-    ...mapMutations("app", ["setDrawer", "toggleDrawer"]),
-    onClickBtn() {
-      this.setDrawer(!this.$store.state.app.drawer);
+    ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
+    onClickBtn () {
+      this.setDrawer(!this.$store.state.app.drawer)
     },
-    onClick() {
+    onClick () {
       //
     },
-    onResponsiveInverted() {
+    onResponsiveInverted () {
       if (window.innerWidth < 991) {
-        this.responsive = true;
-        this.responsiveInput = false;
+        this.responsive = true
+        this.responsiveInput = false
       } else {
-        this.responsive = false;
-        this.responsiveInput = true;
+        this.responsive = false
+        this.responsiveInput = true
       }
     }
   }
-};
+}
 </script>
 
 <style>

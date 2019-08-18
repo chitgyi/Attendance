@@ -35,7 +35,7 @@
               <span class="subheading font-weight-light text--darken-3" v-text="header.text" />
             </template>
             <template slot="items" slot-scope="{ item }">
-              <td>{{item.name}}</td>
+              <td>{{ item.name }}</td>
               <td>{{ item.days }}</td>
               <td>{{ item.email }}</td>
               <td>{{ item.date }}</td>
@@ -108,67 +108,79 @@ export default {
     mitems: []
   }),
   mounted() {
-    let today = new Date();
-    let month = today.getMonth() + "-" + today.getFullYear();
-    let date = today.getDay() + "-" + month;
+    let today = new Date(Date.now());
+    let month = today.getMonth() + 1 + "-" + today.getFullYear();
+    let date = today.getDate() + "-" + month;
     // this.getTodayAttend();
     this.thisMonth(month);
-    this.getTodayAttend(date, month);
+    this.getTodayAttend(date);
   },
   methods: {
-    getTodayAttend(date, month) {
-      let employee = firebase.database().ref("Employee");
-      firebase
-        .database()
-        .ref("Present")
-        .child(month)
-        .orderByChild("date")
-        .equalTo(date)
-        .once("value", snap => {
-          snap.forEach(value => {
-            //this.id.push(value.val().id);
+    getTodayAttend(date) {
+      // this.items = [];
+      // present per day
+      let employee = firestore().collection("employees");
+      firestore()
+        .collection("present")
+        .where("date", "==", date)
+        .get()
+        .then(pres => {
+          pres.forEach(doc => {
             employee
-              .orderByChild("id")
-              .equalTo(value.val().id)
-              .limitToFirst(1)
-              .once("value", employee => {
-                employee.forEach(data => {
-                  let item = {
-                    name: data.val().name,
-                    position: data.val().position,
-                    address: data.val().address,
-                    date: value.val().date
-                  };
-                  this.items.push(item);
+              .where("id", "==", doc.data().eid)
+              .get()
+              .then(emp => {
+                //console.log(res.data().name + " is presented today!")
+                emp.forEach(res => {
+                  this.items.push({
+                    name: res.data().name,
+                    position: res.data().position,
+                    address: res.data().address,
+                    date: doc.data().date
+                  });
                 });
               });
           });
         });
     },
     thisMonth(month) {
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    let date = new Date()
-    let mon = date.getMonth()
-    let year = date.getFullYear()
-      let present = firebase.database().ref("Present");
-      firebase
-        .database()
-        .ref("Employee")
-        .once("value", snap => {
-          snap.forEach(value => {
+      let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      //monthly present
+      let present = firestore().collection("present");
+      let employee = firestore()
+        .collection("employees")
+        .get()
+        .then(emp => {
+          emp.forEach(doc => {
+            let salary = parseInt(doc.data().salary) / 22;
             present
-              .child(month)
-              .orderByChild("id")
-              .equalTo(value.val().id)
-              .once("value", data => {
-                //console.log(value.val().name + " ==> "+ data.numChildren())
-                let salary = parseInt(value.val().salary) / 30;
+              .where("eid", "==", doc.data().id)
+              .where("month", "==", month)
+              .get()
+              .then(res => {
+                // console.log(
+                //   doc.data().name + " =>> " + (salary * res.size).toFixed(2)
+                // );
+                let m = parseInt(month.toString().substring(0,1))-1
                 this.mitems.push({
-                  name: value.val().name,
-                  email: value.val().email,
-                  salary: (salary * data.numChildren()).toFixed(2),
-                  date: months[mon-1]+", "+year,
-                  days: data.numChildren()
+                  name: doc.data().name,
+                  email: doc.data().email,
+                  salary: (salary * res.size).toFixed(2),
+                  date: months[m] + ", " + new Date().getFullYear(),
+                  days: res.size
                 });
               });
           });
