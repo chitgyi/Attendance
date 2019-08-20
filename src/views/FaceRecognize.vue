@@ -11,8 +11,8 @@
       <video id="video" ref="video" hidden width="500" height="380" autoplay />
       <canvas ref="vdo" width="500" height="380" />
       <div>
-        <canvas ref="result" hidden />
-        <v-img :src="image" width="200" />
+        <canvas ref="result" width="150px" />
+        <!-- <v-img :src="image" hidden width="200" /> -->
         <h5>Name : {{ name }}</h5>
         <h5>Similarity : {{ similarity }}%</h5>
       </div>
@@ -47,13 +47,15 @@ export default {
       captures: [],
       canvas: null,
       resized: {},
-      image: "",
       name: "",
+      image: "",
       similarity: "",
       present: "",
       snackbar: false,
       top: true,
-      timeout: 1500
+      timeout: 1500,
+      message: "",
+      color: ""
     };
   },
   created() {},
@@ -83,7 +85,7 @@ export default {
       this.detect(this.canvas);
     }, 1000 / 30);
 
-    setInterval(() => this.result(), 5000);
+    setInterval(() => this.result(), 4500);
   },
   methods: {
     result() {
@@ -93,12 +95,11 @@ export default {
         this.resized.w,
         this.resized.h
       );
-
-      this.$refs.result.getContext("2d").putImageData(img, 0, 0);
-      this.image = this.$refs.result.toDataURL();
       this.$refs.result
         .getContext("2d")
-        .clearRect(0, 0, this.resized.w, this.resized.h);
+        .clearRect(0, 0, 500, 500);
+      this.$refs.result.getContext("2d").putImageData(img, 0, 0);
+      this.image = this.$refs.result.toDataURL();
       this.req();
     },
     detect(ctx) {
@@ -224,6 +225,7 @@ export default {
                         );
                       }
                     });
+
                   break;
                 }
               }
