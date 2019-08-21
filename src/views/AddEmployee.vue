@@ -143,66 +143,6 @@ export default {
           console.log(window.token);
         });
       });
-    // firestore().collection("employees").get().then(res=>{
-    //     res.docs.forEach(doc=>{
-    //         console.log(doc.data())
-    //     })
-    // })
-    // present or already exists
-    // let present = firestore().collection("present");
-    // present
-    //   .where("eid", "==", "PmeDseripjyh5NIMStzx")
-    //   .where("date", "==", "19-8-2019")
-    //   .get()
-    //   .then(res => {
-    //     if (res.empty) {
-    //       present.add({
-    //         eid: "PmeDseripjyh5NIMStzx",
-    //         date: "19-8-2019",
-    //         month: "8-2019"
-    //       }).then(res=>{
-    //         console.log("Added on this day!");
-    //       })
-    //     } else {
-    //       console.log("Already exists!")
-    //     }
-    //   });
-    //monthly present
-    // let present = firestore().collection("present");
-    // let employee = firestore()
-    //   .collection("employees")
-    //   .get()
-    //   .then(res => {
-    //     res.forEach(doc => {
-    //       let salary = parseInt(doc.data().salary) / 22;
-    //       present
-    //         .where("eid", "==", doc.id)
-    //         .where("month", "==", "8-2019")
-    //         .get()
-    //         .then(res => {
-    //           console.log(
-    //             doc.data().name + " =>> " + (salary * res.size).toFixed(2) + " mmks"
-    //           );
-    //         });
-    //     });
-    //   });
-    //present per day
-    // let employee = firestore().collection("employees");
-    // firestore().collection("present").where("date", "==", "19-8-2019").get().then(res=>{
-    //     res.forEach(doc=>{
-    //         employee.doc(doc.data().eid).get().then(res=>{
-    //             console.log(res.data().name + " is presented today!")
-    //         })
-    //     })
-    // })
-    //check employee's name
-    // firestore().collection("employees").where("name", "==", "Soe Soe").get().then(res=>{
-    //     if(!res.empty){
-    //         console.log("Employee's name is exists!")
-    //     }else{
-    //         console.log("Add Employee")
-    //     }
-    // })
   },
   methods: {
     req() {

@@ -25,7 +25,7 @@
       <v-flex md12>
         <v-card color="blue">
           <v-card-title class="title" style="color: white">
-            Today Attended Employees
+            Today Attendance Employees
             <v-spacer></v-spacer>
             <v-tooltip top>
               <v-icon slot="activator" dark color="white" @click="pickDaily">mdi-calendar-multiple</v-icon>
@@ -63,7 +63,7 @@
         </v-card-title>-->
         <v-card color="blue">
           <v-card-title class="title" style="color: white">
-            Monthly Attended Employees
+            Monthly Attendance Employees
             <v-spacer></v-spacer>
             <v-tooltip top>
               <v-icon slot="activator" dark color="white" @click="pickDate">mdi-calendar-multiple</v-icon>
@@ -182,7 +182,6 @@ export default {
               .where("id", "==", doc.data().eid)
               .get()
               .then(emp => {
-                //console.log(res.data().name + " is presented today!")
                 emp.forEach(res => {
                   this.items.push({
                     name: res.data().name,
@@ -224,9 +223,6 @@ export default {
               .where("month", "==", month)
               .get()
               .then(res => {
-                // console.log(
-                //   doc.data().name + " =>> " + (salary * res.size).toFixed(2)
-                // );
                 let m = parseInt(month.toString().substring(0, 1)) - 1;
                 this.mitems.push({
                   name: doc.data().name,

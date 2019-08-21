@@ -16,7 +16,7 @@ export default [
   },
   {
     path: '/attend',
-    name: 'Attended List',
+    name: 'Attendance List',
     view: 'Attended'
   },
   {
