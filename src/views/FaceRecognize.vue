@@ -95,9 +95,7 @@ export default {
         this.resized.w,
         this.resized.h
       );
-      this.$refs.result
-        .getContext("2d")
-        .clearRect(0, 0, 500, 500);
+      this.$refs.result.getContext("2d").clearRect(0, 0, 500, 500);
       this.$refs.result.getContext("2d").putImageData(img, 0, 0);
       this.image = this.$refs.result.toDataURL();
       this.req();
@@ -167,8 +165,9 @@ export default {
     },
     req() {
       let today = new Date(Date.now());
-      let month = today.getMonth() + 1 + "-" + today.getFullYear();
-      let date = today.getDate() + "-" + month;
+      let month =
+        today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2);
+      let date = month + "-" + today.getDate();
       request(
         {
           method: "POST",
@@ -230,6 +229,8 @@ export default {
                 }
               }
             }
+          }else if(res.statusCode == 401){
+            this.snack("Your token is expired!", "error")
           }
           this.name = result.external_image_id.toUpperCase();
           this.similarity = result.similarity.toFixed(2) * 100;

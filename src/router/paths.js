@@ -6,7 +6,7 @@
 export default [
   {
     path: '/face-recognize',
-    // Relative to /src/views
+    name: "Face Recognize",
     view: 'FaceRecognize'
   },
   {
@@ -23,9 +23,5 @@ export default [
     path: '/employee-list',
     name: 'Employee Management',
     view: 'EmployeeList'
-  },
-  {
-    path: '/icons',
-    view: 'Icons'
   }
 ]

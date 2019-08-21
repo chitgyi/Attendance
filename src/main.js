@@ -17,6 +17,7 @@ import router from '@/router'
 import store from '@/store'
 import firebase from 'firebase'
 import VImageInput from 'vuetify-image-input'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyDk2IGa9mkv3tW0KHpBC3VSOWILyee2AuQ',
   authDomain: 'attendedsystem.firebaseapp.com',

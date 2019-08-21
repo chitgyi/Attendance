@@ -56,7 +56,7 @@
                 <v-flex xs12 text-xs-right>
                   <v-btn
                     :disabled="show"
-                    class="mx-0 font-weight-light"
+                    style="color: white"
                     color="blue"
                     @click="req"
                   >Add</v-btn>

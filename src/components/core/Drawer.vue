@@ -85,11 +85,6 @@ export default {
         to: '/employee-list',
         icon: 'mdi-account-group',
         text: 'Employee List'
-      },
-      {
-        to: '/icons',
-        icon: 'mdi-chart-bubble',
-        text: 'Icons'
       }
     ],
     responsive: false
