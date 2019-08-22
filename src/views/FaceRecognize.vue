@@ -33,11 +33,10 @@ var facefinder_classify_region = function(r, c, s, pixels, ldim) {
 };
 var cascadeurl =
   "https://raw.githubusercontent.com/nenadmarkus/pico/c2e81f9d23cc11d1a612fd21e4f9de0921a5d0d9/rnt/cascades/facefinder";
-fetch(cascadeurl).then(function(response) {
+fetch("cascade/facefinder").then(function(response) {
   response.arrayBuffer().then(function(buffer) {
     var bytes = new Int8Array(buffer);
     facefinder_classify_region = pico.unpack_cascade(bytes);
-    //console.log("* cascade loaded");
   });
 });
 export default {
@@ -66,7 +65,6 @@ export default {
       .then(res => {
         res.forEach(doc => {
           window.token = doc.data().token;
-          //console.log(window.token)
         });
       });
     this.video = this.$refs.video;
@@ -190,6 +188,10 @@ export default {
           }
         },
         (err, res, body) => {
+          if (err) {
+            this.snack("Check your internet connection!", "error");
+            return;
+          }
           let result = { similarity: 0, external_image_id: "unknown" };
           let present = firestore().collection("present");
           if (!err && res.statusCode == 200) {
@@ -229,8 +231,8 @@ export default {
                 }
               }
             }
-          }else if(res.statusCode == 401){
-            this.snack("Your token is expired!", "error")
+          } else if (res.statusCode == 401) {
+            this.snack("Your token is expired!", "error");
           }
           this.name = result.external_image_id.toUpperCase();
           this.similarity = result.similarity.toFixed(2) * 100;

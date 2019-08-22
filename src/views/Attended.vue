@@ -46,21 +46,6 @@
         </v-data-table>
       </v-flex>
       <v-flex md12>
-        <!-- <v-card-title color="info">
-              <v-spacer></v-spacer>
-              <div class="d-flex flex-row mb-3">
-                <v-tooltip top>
-                  <v-icon
-                    slot="activator"
-                    dark
-                    color="blue"
-                    @click="pickImage(item)"
-                  >mdi-account-box-multiple</v-icon>
-                  <span>Date</span>
-                </v-tooltip>
-                <v-text-field v-model="search" label="Search" single-line></v-text-field>
-              </div>
-        </v-card-title>-->
         <v-card color="blue">
           <v-card-title class="title" style="color: white">
             Monthly Attendance Employees

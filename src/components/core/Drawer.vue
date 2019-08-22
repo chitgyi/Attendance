@@ -30,7 +30,7 @@
             />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Attended System
+            Attendance System
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
@@ -64,7 +64,7 @@ import {
 
 export default {
   data: () => ({
-    logo: './img/vuetifylogo.png',
+    logo: './img/logo.png',
     links: [
       {
         to: '/face-recognize',
@@ -79,7 +79,7 @@ export default {
       {
         to: '/attend',
         icon: 'mdi-account-multiple-check',
-        text: 'Attended'
+        text: 'Attendance'
       },
       {
         to: '/employee-list',

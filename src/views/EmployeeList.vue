@@ -209,7 +209,6 @@ export default {
       .then(res => {
         res.forEach(doc => {
           window.token = doc.data().token;
-          console.log(window.token);
         });
       });
     this.getEmployee();
@@ -250,7 +249,6 @@ export default {
           }
         },
         (err, res, body) => {
-          console.log(body);
           if (res && res.statusCode == 200) {
             let year = new Date().getFullYear();
             firestore()
@@ -316,7 +314,6 @@ export default {
             }
           },
           (err, res, body) => {
-            console.log(body);
             if (res && res.statusCode == 200) {
               this.loading = false;
               this.snack("Upload Successfully!", "success");
@@ -383,7 +380,6 @@ export default {
         })
         .catch(err => {
           this.loading = false;
-          console.log(err);
           this.snack("Unalbe to update!", "error");
         });
     },
@@ -401,9 +397,7 @@ export default {
       reader.onload = () => {
         this.file = reader.result;
       };
-      reader.onerror = error => {
-        console.log("Error: ", error);
-      };
+      reader.onerror = error => {};
     },
     loadDialog(msg) {
       this.loading = true;
