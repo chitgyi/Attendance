@@ -14,12 +14,12 @@ function getInstallerConfig () {
   const outPath = path.join(rootPath, 'release-builds')
 
   return Promise.resolve({
-    appDirectory: path.join(outPath, 'attended-system-win32-x64/'),
+    appDirectory: path.join(outPath, 'attendance-system-win32-x64/'),
     authors: 'ALERT',
     noMsi: true,
     outputDirectory: path.join(outPath, 'windows-installer'),
-    exe: 'attended-system.exe',
-    setupExe: 'AttendedSystemInstaller.exe',
+    exe: 'attendance-system.exe',
+    setupExe: 'AttendanceSystemInstaller.exe',
     setupIcon: "./img/logo.png"
   })
 }
