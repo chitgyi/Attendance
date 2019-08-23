@@ -37,7 +37,8 @@
           <template slot="headerCell" slot-scope="{ header }">
             <span class="subheading font-weight-light text--darken-3" v-text="header.text" />
           </template>
-          <template slot="items" slot-scope="{ item }">
+          <template slot="items"  slot-scope="{ item , index}">
+            <td>{{index+1}}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.position }}</td>
             <td>{{ item.date }}</td>
@@ -60,7 +61,8 @@
           <template slot="headerCell" slot-scope="{ header }">
             <span class="subheading font-weight-light text--darken-3" v-text="header.text" />
           </template>
-          <template slot="items" slot-scope="{ item }">
+          <template slot="items" slot-scope="{ item, index }">
+           <td>{{index+1}}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.days }}</td>
             <td>{{ item.email }}</td>
@@ -85,6 +87,11 @@ export default {
     search: "",
     headers: [
       {
+       sortable: false,
+        text: "No",
+        value: "no"
+      },
+      {
         sortable: true,
         text: "Name",
         value: "name"
@@ -107,6 +114,11 @@ export default {
       }
     ],
     mheaders: [
+     {
+        sortable: false,
+        text: "No",
+        value: "no"
+      },
       {
         sortable: true,
         text: "Name",
