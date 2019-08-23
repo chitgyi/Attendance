@@ -188,8 +188,8 @@ export default {
           }
         },
         (err, res, body) => {
-          if (err) {
-            this.snack("Check your internet connection!", "error");
+          if (err && res.statusCode == 401) {
+            this.snack("Check your internet connection or expired token!", "error");
             return;
           }
           let result = { similarity: 0, external_image_id: "unknown" };
@@ -231,8 +231,6 @@ export default {
                 }
               }
             }
-          } else if (res.statusCode == 401) {
-            this.snack("Your token is expired!", "error");
           }
           this.name = result.external_image_id.toUpperCase();
           this.similarity = result.similarity.toFixed(2) * 100;

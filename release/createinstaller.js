@@ -20,6 +20,6 @@ function getInstallerConfig () {
     outputDirectory: path.join(outPath, 'windows-installer'),
     exe: 'attended-system.exe',
     setupExe: 'AttendedSystemInstaller.exe',
-    setupIcon: path.join(rootPath, 'assets', 'icons', 'win', 'icon.ico')
+    setupIcon: "./img/logo.png"
   })
 }

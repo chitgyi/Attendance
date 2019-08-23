@@ -5,7 +5,7 @@
   "description": "Face Recognition",
   "main": "electron.js",
   "scripts": {
-    "package-win32": "electron-packager . attended-system --overwrite --platform=win32 --icon=img/logo.png --out=release-builds",
+    "package-win32": "electron-packager . attended-system --overwrite --platform=win32 --icon=img/favicon.png --out=release-builds",
     "package-mac": "electron-packager . attended-system --overwrite --platform=darwin --icon=img/logo.png --out=release-builds",
     "package-linux": "electron-packager .  attended-system --overwrite --asar=true --platform=linux --arch=x64 --icon=img/logo.png --prune=true --out=release-builds",
     "deb": "electron-installer-debian --src release-builds/attended-system-linux-x64/ --arch amd64 --config debian.json",
