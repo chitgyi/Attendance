@@ -188,7 +188,7 @@ export default {
           }
         },
         (err, res, body) => {
-          if (err && res.statusCode == 401) {
+          if (res.statusCode === 401) {
             this.snack("Check your internet connection or expired token!", "error");
             return;
           }
